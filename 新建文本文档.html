@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>高德DOME</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+</head>
+<body>
+  <div id="container" style="width: 100%;height: 500px;"></div>
+</body>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=40b562d9fcf89d0f9ea25dae05aae475"></script>
+<script>
+   window.onload = function(){
+     let map = new AMap.Map("container", {
+       resizeEnable: true,
+       center: [104.066184,30.552277],
+       zoom: 18,
+     });
+     let infoWindow = new AMap.InfoWindow({
+       isCustom: true,  //使用自定义窗体
+       content: '<div id="window" style="font-size: 16px;font-weight: bold;line-height: 1.5em;padding: 5px 15px;">成都天赋信息技术有限公司</div>',
+       offset: new AMap.Pixel(110, 3)
+     });
+     addMarker();
+
+//添加marker标记
+     function addMarker() {
+       map.clearMap();
+       let marker = new AMap.Marker({
+         map: map,
+         position: [104.066184,30.552277]
+       });
+       //鼠标点击marker弹出自定义的信息窗体
+       AMap.event.addListener(marker, 'click', function () {
+         infoWindow.open(map, marker.getPosition());
+       });
+       function show(){
+         infoWindow.open(map, marker.getPosition());
+       }
+       show();
+     }
+   }
+</script>
+
+</html>
+
